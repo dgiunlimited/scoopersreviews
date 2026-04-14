@@ -260,7 +260,7 @@
     // Header
     html += '<div class="scoop-header">';
     html += '<div class="scoop-rating-big">' + rating.toFixed(1) + '</div>';
-    html += '<div class="scoop-rating-sub">Based on <strong>' + count + '</strong> reviews</div>';
+    html += '<div class="scoop-rating-sub"><a href="https://search.google.com/local/reviews?placeid=ChIJkWreIPBrAIkRR0ucau4Cb6U" target="_blank" style="color:inherit;text-decoration:underline;">Based on <strong>' + count + '</strong> reviews</a></div>';
     html += '</div>';
 
     // Cards
