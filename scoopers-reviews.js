@@ -278,7 +278,7 @@
 
         html += '<div class="scoop-card">';
         html += '<span class="scoop-quote-icon">&ldquo;</span>';
-        html += '<div class="scoop-card-stars">' + starHTML(r.rating, 15) + '</div>';
+        html += '<div class="scoop-card-stars"><span style="color:#f5a623;font-weight:700;font-size:15px;margin-right:4px;">' + r.rating + '</span>' + starHTML(r.rating, 18) + '</div>';
         html += '<p class="scoop-card-text">' + text;
         if (truncated) html += ' <a href="' + MAPS_URI + '" target="_blank">More</a>';
         html += '</p>';
