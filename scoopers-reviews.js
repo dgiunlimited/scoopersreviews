@@ -4,8 +4,6 @@
   var PLACE_ID    = 'ChIJkWreIPBrAIkRR0ucau4Cb6U';
   var MAX_SHOW    = 5;
   var TRUNCATE    = 160;
-  var CACHE_KEY   = 'scoopers_reviews_v2';
-  var CACHE_TTL   = 24 * 60 * 60 * 1000;
   var MAPS_URI    = 'https://maps.google.com/?cid=12028608823157291847';
   var GREEN       = '#1a9e75';
   var GREEN_DARK  = '#157a5a';
@@ -49,23 +47,6 @@
     return Array(5).fill(0).map(function (_, i) {
       return '<span style="color:' + (i < n ? '#f5a623' : '#ddd') + ';font-size:' + size + 'px;">★</span>';
     }).join('');
-  }
-
-  // --- CACHE ---
-  function getCache() {
-    try {
-      var raw = localStorage.getItem(CACHE_KEY);
-      if (!raw) return null;
-      var entry = JSON.parse(raw);
-      if (Date.now() - entry.ts > CACHE_TTL) return null;
-      return entry.data;
-    } catch (e) { return null; }
-  }
-
-  function setCache(data) {
-    try {
-      localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: data }));
-    } catch (e) {}
   }
 
   // --- API ---
@@ -302,16 +283,9 @@
   // --- MAIN ---
   async function loadReviews() {
     try {
-      var cached = getCache();
-      if (cached) {
-        log('Using cached data.', 'ok');
-        render(cached);
-        return;
-      }
       log('Fetching from Google Places API...');
       var data = await fetchFromAPI();
-      setCache(data);
-      log('Fetched and cached for 24 hours.', 'ok');
+      log('Fetched successfully.', 'ok');
       render(data);
     } catch (err) {
       log('ERROR: ' + err.message, 'err');
