@@ -232,10 +232,28 @@
     var count    = data.userRatingCount || 0;
     var allRevs  = data.reviews || [];
 
-    var reviews = allRevs
+    // 3 hardcoded real reviews to always fill the grid
+    var PINNED = [
+      { rating: 5, text: 'Wow thanks so much! We let our yard go over the holidays and Scoopers was there to help us get it right again! Very professional and great communication throughout the whole process. Highly recommend!', authorAttribution: { displayName: 'Adam Law' }, publishTime: '2026-01-09T00:00:00Z' },
+      { rating: 5, text: 'Max was polite and very easy to work with. He fit me in immediately. The text messages were a great touch. I would recommend this company above and beyond to anyone looking for this service!', authorAttribution: { displayName: 'Dwayne Kirk' }, publishTime: '2025-12-04T00:00:00Z' },
+      { rating: 5, text: 'We are extremely pleased with this service! Everything was explained to us, we set a day for his return, and the yard looked extremely good when he was done. Will definitely use again!', authorAttribution: { displayName: 'Kimberly Hill' }, publishTime: '2026-03-10T00:00:00Z' }
+    ];
+
+    // Get up to MAX_SHOW from API (5-star, newest first)
+    var apiReviews = allRevs
       .filter(function (r) { return r.rating === 5; })
       .sort(function (a, b) { return new Date(b.publishTime) - new Date(a.publishTime); })
       .slice(0, MAX_SHOW);
+
+    // Add pinned reviews that aren't already showing from the API
+    var apiNames = apiReviews.map(function (r) {
+      return (r.authorAttribution?.displayName || '').toLowerCase();
+    });
+    var extras = PINNED.filter(function (p) {
+      return apiNames.indexOf(p.authorAttribution.displayName.toLowerCase()) === -1;
+    });
+
+    var reviews = apiReviews.concat(extras);
 
     var html = '<div class="scoop-wrap">';
 
