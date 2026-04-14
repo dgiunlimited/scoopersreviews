@@ -265,7 +265,6 @@
     html += '<div class="scoop-rating-big">' + rating.toFixed(1) + '</div>';
     html += '<div>' + starHTML(Math.round(rating), 22) + '</div>';
     html += '<div class="scoop-rating-sub">Based on <strong>' + count + '</strong> reviews</div>';
-    html += '<a class="scoop-cta-btn" href="' + MAPS_URI + '" target="_blank">✏ Write a Review</a>';
     html += '</div>';
 
     // Cards
@@ -298,7 +297,11 @@
         html += '</div></div>';
       });
     }
-    html += '</div></div>';
+    html += '</div>';
+    html += '<div style="text-align:center;margin-top:28px;">';
+    html += '<a class="scoop-cta-btn" href="' + MAPS_URI + '" target="_blank">✏ Leave a Review</a>';
+    html += '</div>';
+    html += '</div>';
 
     ui.innerHTML = html;
     log('Widget rendered.', 'ok');
