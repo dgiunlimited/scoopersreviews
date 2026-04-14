@@ -5,7 +5,7 @@
   var PLACE_ID    = 'ChIJkWreIPBrAIkRR0ucau4Cb6U';
   var MAX_SHOW    = 5;
   var TRUNCATE    = 160;
-  var MAPS_URI    = 'https://maps.google.com/?cid=12028608823157291847';
+  var MAPS_URI    = 'https://search.google.com/local/writereview?placeid=ChIJkWreIPBrAIkRR0ucau4Cb6U';
   var GREEN       = '#1a9e75';
   var GREEN_DARK  = '#157a5a';
 
