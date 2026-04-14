@@ -127,10 +127,15 @@
       }
       .scoop-cta-btn:hover { background: ${GREEN_DARK}; color: #ffffff !important; }
       .scoop-grid {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         gap: 18px;
-        justify-content: center;
+      }
+      @media (max-width: 900px) {
+        .scoop-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 500px) {
+        .scoop-grid { grid-template-columns: 1fr; }
       }
       .scoop-card {
         background: #fff;
@@ -138,9 +143,6 @@
         border: 1px solid #ebebeb;
         box-shadow: 0 2px 12px rgba(0,0,0,0.07);
         padding: 20px;
-        flex: 1 1 200px;
-        max-width: 280px;
-        min-width: 200px;
         display: flex;
         flex-direction: column;
         transition: transform 0.2s, box-shadow 0.2s;
@@ -208,7 +210,6 @@
         color: #aaa;
       }
       @media (max-width: 640px) {
-        .scoop-card { max-width: 100%; min-width: unset; flex: 1 1 100%; }
         .scoop-rating-big { font-size: 40px; }
       }
     `;
