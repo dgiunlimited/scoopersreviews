@@ -1,6 +1,6 @@
 (function() {
   // --- 1. CONFIGURATION ---
-  var API_KEY  = 'AIzaSyDBlokBFGQYneCZnerW3iHEvRE6baIGFBs'; 
+  var API_KEY  = 'AIzaSyDBlokBFGQYneCZnerW3iHEvRE6baIGFBs';
   var PLACE_ID = 'ChIJkWreIPBrAIkRR0ucau4Cb6U'; // Your verified ID
   var ACCENT   = '#1a9e75';
   var MAX_REVIEWS = 5;
@@ -31,18 +31,18 @@
 
       log('Fetching Scoopers data...');
       await place.fetchFields({
-        fields: ['displayName', 'rating', 'userRatingCount', 'reviews', 'googleMapsLinks', 'googleMapsUri']
+        fields: ['displayName', 'rating', 'userRatingCount', 'reviews', 'googleMapsLinks']
       });
 
       var name = place.displayName?.text || "Scoopers Pet Waste Removal";
       var rating = place.rating || 5.0;
       var count = place.userRatingCount || 0;
-      var mapsUri = place.googleMapsLinks?.reviewsUri || place.googleMapsUri || 'https://maps.google.com/?cid=12028608823157291847';
+      var mapsUri = place.googleMapsLinks?.reviewsUri || 'https://maps.google.com/?cid=12028608823157291847';
 
       log('Success: Received data for ' + name, 'ok');
 
       var html = '<div style="font-family:sans-serif; max-width:780px; margin:0 auto; padding:25px; border:1px solid #eee; border-radius:15px; background:#fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">';
-      
+
       // Header
       html += '<div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #f9f9f9; padding-bottom:15px; margin-bottom:20px;">';
       html += '<div><h3 style="margin:0; font-size:20px;">' + name + '</h3>';
@@ -64,7 +64,7 @@
       }
 
       html += '<div style="text-align:center; margin-top:20px; border-top:1px solid #eee; padding-top:15px;"><a href="'+mapsUri+'" target="_blank" style="color:'+ACCENT+'; text-decoration:none; font-weight:bold;">View All on Google Maps →</a></div></div>';
-      
+
       ui.innerHTML = html;
       log('Widget Rendered!', 'ok');
 
@@ -77,6 +77,6 @@
 
   var s = document.createElement('script');
   s.src = 'https://maps.googleapis.com/maps/api/js?key=' + API_KEY + '&callback=_initScoopers&v=beta&libraries=places';
-  s.async = true; 
+  s.async = true;
   document.head.appendChild(s);
 })();
