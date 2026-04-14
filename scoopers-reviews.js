@@ -116,16 +116,16 @@
         display: inline-block;
         margin-top: 18px;
         background: ${GREEN};
-        color: #fff;
-        text-decoration: none;
-        padding: 11px 24px;
+        color: #ffffff !important;
+        text-decoration: none !important;
+        padding: 11px 28px;
         border-radius: 6px;
         font-size: 14px;
         font-weight: 600;
         letter-spacing: 0.3px;
         transition: background 0.2s;
       }
-      .scoop-cta-btn:hover { background: ${GREEN_DARK}; }
+      .scoop-cta-btn:hover { background: ${GREEN_DARK}; color: #ffffff !important; }
       .scoop-grid {
         display: flex;
         flex-wrap: wrap;
@@ -259,9 +259,6 @@
 
     // Header
     html += '<div class="scoop-header">';
-    html += '<div class="scoop-header-top">';
-    html += '<div class="scoop-google-badge">' + GOOGLE_G + '&nbsp;Google Reviews</div>';
-    html += '</div>';
     html += '<div class="scoop-rating-big">' + rating.toFixed(1) + '</div>';
     html += '<div>' + starHTML(Math.round(rating), 22) + '</div>';
     html += '<div class="scoop-rating-sub">Based on <strong>' + count + '</strong> reviews</div>';
@@ -299,7 +296,7 @@
     }
     html += '</div>';
     html += '<div style="text-align:center;margin-top:28px;">';
-    html += '<a class="scoop-cta-btn" href="' + MAPS_URI + '" target="_blank">✏ Leave a Review</a>';
+    html += '<a class="scoop-cta-btn" href="' + MAPS_URI + '" target="_blank">Leave a Review</a>';
     html += '</div>';
     html += '</div>';
 
