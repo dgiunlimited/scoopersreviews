@@ -169,6 +169,8 @@
 
     } catch (err) {
       log('CRITICAL ERROR: ' + err.message, 'err');
+      var ui = document.getElementById('scoopers-reviews-ui');
+      if (ui) ui.innerHTML = '<p style="color:#cc0000;font-family:monospace;font-size:12px;padding:10px;">Widget error: ' + err.message + '</p>';
     }
   }
 
