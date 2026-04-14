@@ -260,7 +260,6 @@
     // Header
     html += '<div class="scoop-header">';
     html += '<div class="scoop-rating-big">' + rating.toFixed(1) + '</div>';
-    html += '<div>' + starHTML(Math.round(rating), 22) + '</div>';
     html += '<div class="scoop-rating-sub">Based on <strong>' + count + '</strong> reviews</div>';
     html += '</div>';
 
