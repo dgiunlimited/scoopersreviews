@@ -42,7 +42,7 @@
             + '?key=' + API_KEY;
     var res = await fetch(url, {
       headers: {
-        'X-Goog-FieldMask': 'displayName,rating,userRatingCount,reviews,googleMapsLinks'
+        'X-Goog-FieldMask': 'displayName,rating,userRatingCount,reviews'
       }
     });
     if (!res.ok) throw new Error('HTTP ' + res.status + ' from Places API');
@@ -109,7 +109,7 @@
 
     injectStyles();
 
-    var mapsUri  = data.googleMapsLinks?.reviewsUri || 'https://maps.google.com/?cid=12028608823157291847';
+    var mapsUri  = 'https://maps.google.com/?cid=12028608823157291847';
     var allRevs  = data.reviews || [];
 
     // Filter to 5-star only, sort newest first, then take MAX_SHOW
