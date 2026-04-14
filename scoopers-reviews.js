@@ -39,7 +39,7 @@
   // --- API ---
   async function fetchFromAPI() {
     var url = 'https://places.googleapis.com/v1/places/' + PLACE_ID
-            + '?reviewsSortOrder=NEWEST&key=' + API_KEY;
+            + '?key=' + API_KEY;
     var res = await fetch(url, {
       headers: {
         'X-Goog-FieldMask': 'displayName,rating,userRatingCount,reviews,googleMapsLinks'
@@ -112,8 +112,11 @@
     var mapsUri  = data.googleMapsLinks?.reviewsUri || 'https://maps.google.com/?cid=12028608823157291847';
     var allRevs  = data.reviews || [];
 
-    // Filter to 5-star only, then take most recent MAX_SHOW
-    var reviews = allRevs.filter(function (r) { return r.rating === 5; }).slice(0, MAX_SHOW);
+    // Filter to 5-star only, sort newest first, then take MAX_SHOW
+    var reviews = allRevs
+      .filter(function (r) { return r.rating === 5; })
+      .sort(function (a, b) { return new Date(b.publishTime) - new Date(a.publishTime); })
+      .slice(0, MAX_SHOW);
 
     var html = '<div id="scoopers-grid">';
 
