@@ -1,3 +1,4 @@
+/* global google */
 (function () {
   // --- CONFIGURATION ---
   var API_KEY     = 'AIzaSyDBlokBFGQYneCZnerW3iHEvRE6baIGFBs';
@@ -49,14 +50,19 @@
     }).join('');
   }
 
-  // --- API ---
+  // --- API (Google Maps JS SDK) ---
   async function fetchFromAPI() {
-    var url = 'https://places.googleapis.com/v1/places/' + PLACE_ID + '?key=' + API_KEY;
-    var res = await fetch(url, {
-      headers: { 'X-Goog-FieldMask': 'displayName,rating,userRatingCount,reviews' }
+    const { Place } = await google.maps.importLibrary('places');
+    const place = new Place({ id: PLACE_ID, requestedLanguage: 'en' });
+    await place.fetchFields({
+      fields: ['displayName', 'rating', 'userRatingCount', 'reviews']
     });
-    if (!res.ok) throw new Error('HTTP ' + res.status + ' from Places API');
-    return await res.json();
+    return {
+      displayName:     place.displayName,
+      rating:          place.rating,
+      userRatingCount: place.userRatingCount,
+      reviews:         place.reviews || []
+    };
   }
 
   // --- STYLES ---
@@ -294,5 +300,10 @@
     }
   }
 
-  loadReviews();
+  // Load Google Maps JS SDK, then run widget
+  window._initScoopers = function () { loadReviews(); };
+  var s = document.createElement('script');
+  s.src = 'https://maps.googleapis.com/maps/api/js?key=' + API_KEY + '&callback=_initScoopers&v=beta&libraries=places';
+  s.async = true;
+  document.head.appendChild(s);
 })();
